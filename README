@@ -1,0 +1,46 @@
+= jekyll-testtasks - Test your Jekyll plugins with ease.
+
+== VERSION
+
+This documentation refers to jekyll-testtasks version 0.0.1
+
+
+== DESCRIPTION
+
+Simplifies testing your Jekyll plugins. Just add this to your Rakefile:
+
+  require 'jekyll/testtasks'
+
+Currently only allows to run Jekyll's original test tasks with your plugin
+loaded to make sure you didn't break anything. More to come?
+
+
+== LINKS
+
+<b></b>
+Documentation:: <http://rdoc.info/projects/blackwinter/jekyll-testtasks>
+Source code::   <http://github.com/blackwinter/jekyll-testtasks>
+RubyGem::       <http://rubygems.org/gems/jekyll-testtasks>
+
+
+== AUTHORS
+
+* Jens Wille <mailto:jens.wille@uni-koeln.de>
+
+
+== LICENSE AND COPYRIGHT
+
+Copyright (C) 2010 University of Cologne,
+Albertus-Magnus-Platz, 50923 Cologne, Germany
+
+jekyll-testtasks is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
+
+jekyll-testtasks is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+jekyll-testtasks. If not, see <http://www.gnu.org/licenses/>.
