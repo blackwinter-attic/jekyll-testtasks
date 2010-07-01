@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>README
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Thu Jul 01 18:19:36 +0200 2010</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1>jekyll-testtasks - Test your <a href="../classes/Jekyll.html">Jekyll</a> plugins with ease.</h1>
+<h2>VERSION</h2>
+<p>
+This documentation refers to jekyll-testtasks version 0.0.1
+</p>
+<h2>DESCRIPTION</h2>
+<p>
+Simplifies testing your <a href="../classes/Jekyll.html">Jekyll</a>
+plugins. Just add this to your Rakefile:
+</p>
+<pre>
+  require 'jekyll/testtasks'
+</pre>
+<p>
+Currently only allows to run <a
+href="../classes/Jekyll.html">Jekyll</a>&#8216;s original test tasks with
+your plugin loaded to make sure you didn&#8216;t break anything. More to
+come?
+</p>
+<h2>LINKS</h2>
+<p>
+</p>
+<table>
+<tr><td valign="top">Documentation:</td><td>&lt;<a
+href="http://rdoc.info/projects/blackwinter/jekyll-testtasks">rdoc.info/projects/blackwinter/jekyll-testtasks</a>&gt;
+
+</td></tr>
+<tr><td valign="top">Source code:</td><td>&lt;<a
+href="http://github.com/blackwinter/jekyll-testtasks">github.com/blackwinter/jekyll-testtasks</a>&gt;
+
+</td></tr>
+<tr><td valign="top">RubyGem:</td><td>&lt;<a
+href="http://rubygems.org/gems/jekyll-testtasks">rubygems.org/gems/jekyll-testtasks</a>&gt;
+
+</td></tr>
+</table>
+<h2>AUTHORS</h2>
+<ul>
+<li>Jens Wille &lt;<a
+href="mailto:jens.wille@uni-koeln.de">jens.wille@uni-koeln.de</a>&gt;
+
+</li>
+</ul>
+<h2>LICENSE AND COPYRIGHT</h2>
+<p>
+Copyright (C) 2010 University of Cologne, Albertus-Magnus-Platz, 50923
+Cologne, Germany
+</p>
+<p>
+jekyll-testtasks is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the Free
+Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+</p>
+<p>
+jekyll-testtasks is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+more details.
+</p>
+<p>
+You should have received a copy of the GNU General Public License along
+with jekyll-testtasks. If not, see &lt;<a
+href="http://www.gnu.org/licenses">www.gnu.org/licenses</a>/&gt;.
+</p>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
