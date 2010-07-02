@@ -14,6 +14,14 @@ Simplifies testing your Jekyll plugins. Just add this to your Rakefile:
 Currently only allows to run Jekyll's original test tasks with your plugin
 loaded to make sure you didn't break anything. More to come?
 
+Note that your Jekyll installation needs to be patched in order to run with
+your plugin loaded. The necessary patch will be displayed when you try to
+run a task against an unpatched installation.
+
+You can point at the Jekyll installation to use by either setting the
+environment variable +JEKYLL+ or by creating a file <tt>.jekyll</tt> in
+your plugin's project directory with the path in it.
+
 
 == LINKS
 
