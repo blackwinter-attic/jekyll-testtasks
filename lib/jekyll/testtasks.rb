@@ -44,7 +44,9 @@ index 7570cb0..9fbe738 100644
       abort 'Must set JEKYLL to point at patched Jekyll installation' unless ENV['JEKYLL']
 
       Dir.chdir(ENV['JEKYLL']) {
-        unless %w[PLUGIN_PATH PLUGIN].all? { |k| system('grep', '-q', "'#{k}'", 'lib/jekyll/site.rb') }
+        file = File.read('lib/jekyll/site.rb')
+
+        unless %w[PLUGIN_PATH PLUGIN].all? { |k| file =~ /'#{k}'/  }
           warn 'Jekyll must be patched in order to run with this plugin loaded'
           puts
           puts JEKYLL_PATCH
