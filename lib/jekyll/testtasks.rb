@@ -43,13 +43,15 @@ index 7570cb0..9fbe738 100644
     #
     # Run Jekyll's original Rake task +task+ with this plugin loaded.
     def run_jekyll_task(task)
-      abort 'Must set JEKYLL to point at patched Jekyll installation' unless ENV['JEKYLL']
+      jekyll = ENV['JEKYLL'] || File.readable?('.jekyll') && File.read('.jekyll').strip
+      abort 'Must set JEKYLL to point at patched Jekyll installation' unless jekyll
 
-      Dir.chdir(ENV['JEKYLL']) {
+      Dir.chdir(jekyll) {
         file = File.read('lib/jekyll/site.rb')
 
         unless %w[PLUGIN_PATH PLUGIN].all? { |k| file =~ /'#{k}'/  }
           warn 'Jekyll must be patched in order to run with this plugin loaded'
+          warn "[Found Jekyll at #{Dir.pwd}]"
           puts
           puts JEKYLL_PATCH
 
