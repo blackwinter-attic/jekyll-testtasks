@@ -84,7 +84,11 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000002">run_jekyll_task</a>&nbsp;&nbsp;
+      <a href="#M000002">ensure_jekyll_patch</a>&nbsp;&nbsp;
+      <a href="#M000004">in_jekyll_dir</a>&nbsp;&nbsp;
+      <a href="#M000006">install_tasks</a>&nbsp;&nbsp;
+      <a href="#M000003">jekyll_dir</a>&nbsp;&nbsp;
+      <a href="#M000005">run_jekyll_task</a>&nbsp;&nbsp;
       <a href="#M000001">setup_env</a>&nbsp;&nbsp;
       </div>
     </div>
@@ -100,6 +104,10 @@
       <h3 class="section-bar">Classes and Modules</h3>
 
       Module <a href="TestTasks/Version.html" class="link">Jekyll::TestTasks::Version</a><br />
+Class <a href="TestTasks/NotFoundError.html" class="link">Jekyll::TestTasks::NotFoundError</a><br />
+Class <a href="TestTasks/NotSetError.html" class="link">Jekyll::TestTasks::NotSetError</a><br />
+Class <a href="TestTasks/TestTasksError.html" class="link">Jekyll::TestTasks::TestTasksError</a><br />
+Class <a href="TestTasks/UnpatchedError.html" class="link">Jekyll::TestTasks::UnpatchedError</a><br />
 
     </div>
 
@@ -108,6 +116,17 @@
 
       <div class="name-list">
         <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TASKS</td>
+          <td>=</td>
+          <td class="context-item-value">%w[test features].freeze</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+<a href="../Jekyll.html">Jekyll</a>&#8216;s test tasks to install for the
+plugin
+
+</td>
+        </tr>
         <tr class="top-aligned-row context-row">
           <td class="context-item-name">CALLER</td>
           <td>=</td>
@@ -124,7 +143,7 @@ Where we&#8216;re called from (the plugin location)
           <td class="context-item-value">&lt;&lt;-JEKYLL_PATCH diff --git a/lib/jekyll/site.rb b/lib/jekyll/site.rb index 7570cb0..9fbe738 100644 --- a/lib/jekyll/site.rb +++ b/lib/jekyll/site.rb @@ -43,6 +43,9 @@ module Jekyll        # If safe mode is off, load in any ruby files under the plugins        # directory.        unless self.safe +        ENV['PLUGIN_PATH'].split(':').each { |f| $: &lt;&lt; f } if ENV['PLUGIN_PATH'] +        ENV['PLUGIN'].split(':').each { |f| require f } if ENV['PLUGIN'] +          Dir[File.join(self.plugins, &quot;**/*.rb&quot;)].each do |f|            require f          end     JEKYLL_PATCH</td>
           <td width="3em">&nbsp;</td>
           <td class="context-item-desc">
-Patch to apply to <a href="../Jekyll.html">Jekyll</a> installation
+Patch to apply to the <a href="../Jekyll.html">Jekyll</a> installation
 
 </td>
         </tr>
@@ -151,6 +170,127 @@ Patch to apply to <a href="../Jekyll.html">Jekyll</a> installation
 
         <div class="method-heading">
           <a href="#M000002" class="method-signature">
+          <span class="method-name">ensure_jekyll_patch<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Ensures that the specified <a href="../Jekyll.html">Jekyll</a> installation
+seems to be patched appropriately.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000002-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000002-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/jekyll/testtasks.rb, line 48</span>
+48:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">ensure_jekyll_patch</span>
+49:       <span class="ruby-identifier">file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-value str">'lib/jekyll/site.rb'</span>)
+50:       <span class="ruby-identifier">raise</span> <span class="ruby-constant">UnpatchedError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Dir</span>.<span class="ruby-identifier">pwd</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-node">%w[PLUGIN_PATH PLUGIN]</span>.<span class="ruby-identifier">all?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">file</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/'#{k}'/</span>  }
+51:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000004" class="method-detail">
+        <a name="M000004"></a>
+
+        <div class="method-heading">
+          <a href="#M000004" class="method-signature">
+          <span class="method-name">in_jekyll_dir { ... }<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Runs the block inside the <a href="../Jekyll.html">Jekyll</a> installation
+directory.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000004-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000004-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/jekyll/testtasks.rb, line 75</span>
+75:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">in_jekyll_dir</span>
+76:       <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-identifier">jekyll_dir</span>) { <span class="ruby-identifier">ensure_jekyll_patch</span>; <span class="ruby-keyword kw">yield</span> }
+77:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000006" class="method-detail">
+        <a name="M000006"></a>
+
+        <div class="method-heading">
+          <a href="#M000006" class="method-signature">
+          <span class="method-name">install_tasks<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Installs the relevant tasks.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000006-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000006-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/jekyll/testtasks.rb, line 96</span>
+96:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_tasks</span>
+97:       <span class="ruby-identifier">require</span> <span class="ruby-value str">'jekyll/testtasks/rake'</span>
+98:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000003" class="method-detail">
+        <a name="M000003"></a>
+
+        <div class="method-heading">
+          <a href="#M000003" class="method-signature">
+          <span class="method-name">jekyll_dir => aString<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the <a href="../Jekyll.html">Jekyll</a> installation directory as
+specified through the <tt>JEKYLL</tt> environment variable or the
+<tt>.jekyll</tt> file in your plugin&#8216;s project directory.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000003-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000003-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/jekyll/testtasks.rb, line 59</span>
+59:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">jekyll_dir</span>
+60:       <span class="ruby-identifier">jekyll</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-value str">'JEKYLL'</span>] <span class="ruby-operator">||</span> <span class="ruby-keyword kw">begin</span>
+61:         <span class="ruby-identifier">dot_jekyll</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">CALLER</span>, <span class="ruby-value str">'.jekyll'</span>)
+62:         <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">dot_jekyll</span>).<span class="ruby-identifier">strip</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">readable?</span>(<span class="ruby-identifier">dot_jekyll</span>)
+63:       <span class="ruby-keyword kw">end</span>
+64: 
+65:       <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotSetError</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">jekyll</span>
+66:       <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotFoundError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">jekyll</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">jekyll</span>)
+67: 
+68:       <span class="ruby-identifier">jekyll</span>
+69:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000005" class="method-detail">
+        <a name="M000005"></a>
+
+        <div class="method-heading">
+          <a href="#M000005" class="method-signature">
           <span class="method-name">run_jekyll_task(task)<br />
 </span>
           </a>
@@ -158,29 +298,22 @@ Patch to apply to <a href="../Jekyll.html">Jekyll</a> installation
       
         <div class="method-description">
           <p>
-Run <a href="../Jekyll.html">Jekyll</a>&#8216;s original Rake task
-<tt>task</tt> with this plugin loaded.
+Runs <a href="../Jekyll.html">Jekyll</a>&#8216;s original Rake task
+<tt>task</tt>.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000002-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000002-source">
+            onclick="toggleCode('M000005-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000005-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/jekyll/testtasks.rb, line 44</span>
-44:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_jekyll_task</span>(<span class="ruby-identifier">task</span>)
-45:       <span class="ruby-identifier">abort</span> <span class="ruby-value str">'Must set JEKYLL to point at patched Jekyll installation'</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">ENV</span>[<span class="ruby-value str">'JEKYLL'</span>]
-46: 
-47:       <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-constant">ENV</span>[<span class="ruby-value str">'JEKYLL'</span>]) {
-48:         <span class="ruby-keyword kw">unless</span> <span class="ruby-node">%w[PLUGIN_PATH PLUGIN]</span>.<span class="ruby-identifier">all?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">system</span>(<span class="ruby-value str">'grep'</span>, <span class="ruby-value str">'-q'</span>, <span class="ruby-node">&quot;'#{k}'&quot;</span>, <span class="ruby-value str">'lib/jekyll/site.rb'</span>) }
-49:           <span class="ruby-identifier">warn</span> <span class="ruby-value str">'Jekyll must be patched in order to run with this plugin loaded'</span>
-50:           <span class="ruby-identifier">puts</span>
-51:           <span class="ruby-identifier">puts</span> <span class="ruby-constant">JEKYLL_PATCH</span>
-52: 
-53:           <span class="ruby-identifier">abort</span>
-54:         <span class="ruby-keyword kw">end</span>
-55: 
-56:         <span class="ruby-identifier">system</span>(<span class="ruby-value str">'rake'</span>, <span class="ruby-identifier">task</span>)
-57:       }
-58:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/jekyll/testtasks.rb, line 83</span>
+83:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_jekyll_task</span>(<span class="ruby-identifier">task</span>)
+84:       <span class="ruby-identifier">in_jekyll_dir</span> { <span class="ruby-identifier">system</span>(<span class="ruby-value str">'rake'</span>, <span class="ruby-identifier">task</span>) }
+85:     <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">TestTasksError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
+86:       <span class="ruby-identifier">warn</span> <span class="ruby-identifier">err</span>.<span class="ruby-identifier">to_s</span>
+87:       <span class="ruby-identifier">puts</span> <span class="ruby-identifier">err</span>.<span class="ruby-identifier">payload</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">err</span>.<span class="ruby-identifier">payload</span>
+88: 
+89:       <span class="ruby-identifier">exit</span> <span class="ruby-value">1</span>
+90:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -198,18 +331,18 @@ Run <a href="../Jekyll.html">Jekyll</a>&#8216;s original Rake task
       
         <div class="method-description">
           <p>
-Set environment variables for patched <a href="../Jekyll.html">Jekyll</a>
-to pick up.
+Sets environment variables for the patched <a
+href="../Jekyll.html">Jekyll</a> to pick up.
 </p>
           <p><a class="source-toggle" href="#"
             onclick="toggleCode('M000001-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000001-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/jekyll/testtasks.rb, line 35</span>
-35:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">setup_env</span>
-36:       <span class="ruby-constant">ENV</span>[<span class="ruby-value str">'PLUGIN_PATH'</span>] = <span class="ruby-constant">Dir</span>[<span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-value str">'../jekyll-*/lib'</span>, <span class="ruby-constant">CALLER</span>)].<span class="ruby-identifier">join</span>(<span class="ruby-value str">':'</span>)
-37:       <span class="ruby-constant">ENV</span>[<span class="ruby-value str">'PLUGIN'</span>] = <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-constant">CALLER</span>).<span class="ruby-identifier">sub</span>(<span class="ruby-value str">'-'</span>, <span class="ruby-value str">'/'</span>)
-38:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/jekyll/testtasks.rb, line 38</span>
+38:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">setup_env</span>
+39:       <span class="ruby-constant">ENV</span>[<span class="ruby-value str">'PLUGIN_PATH'</span>] = <span class="ruby-constant">Dir</span>[<span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-value str">'../jekyll-*/lib'</span>, <span class="ruby-constant">CALLER</span>)].<span class="ruby-identifier">join</span>(<span class="ruby-value str">':'</span>)
+40:       <span class="ruby-constant">ENV</span>[<span class="ruby-value str">'PLUGIN'</span>] = <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-constant">CALLER</span>).<span class="ruby-identifier">sub</span>(<span class="ruby-value str">'-'</span>, <span class="ruby-value str">'/'</span>)
+41:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

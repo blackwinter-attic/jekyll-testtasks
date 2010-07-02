@@ -56,7 +56,7 @@
     </tr>
     <tr class="top-aligned-row">
       <td><strong>Last Update:</strong></td>
-      <td>Thu Jul 01 18:19:36 +0200 2010</td>
+      <td>Fri Jul 02 17:49:07 +0200 2010</td>
     </tr>
     </table>
   </div>
@@ -72,7 +72,7 @@
       <h1>jekyll-testtasks - Test your <a href="../classes/Jekyll.html">Jekyll</a> plugins with ease.</h1>
 <h2>VERSION</h2>
 <p>
-This documentation refers to jekyll-testtasks version 0.0.1
+This documentation refers to jekyll-testtasks version 0.0.2
 </p>
 <h2>DESCRIPTION</h2>
 <p>
@@ -80,13 +80,25 @@ Simplifies testing your <a href="../classes/Jekyll.html">Jekyll</a>
 plugins. Just add this to your Rakefile:
 </p>
 <pre>
-  require 'jekyll/testtasks'
+  require 'jekyll/testtasks/rake'
 </pre>
 <p>
 Currently only allows to run <a
 href="../classes/Jekyll.html">Jekyll</a>&#8216;s original test tasks with
 your plugin loaded to make sure you didn&#8216;t break anything. More to
 come?
+</p>
+<p>
+Note that your <a href="../classes/Jekyll.html">Jekyll</a> installation
+needs to be patched in order to run with your plugin loaded. The necessary
+patch will be displayed when you try to run a task against an unpatched
+installation.
+</p>
+<p>
+You can point at the <a href="../classes/Jekyll.html">Jekyll</a>
+installation to use by either setting the environment variable
+<tt>JEKYLL</tt> or by creating a file <tt>.jekyll</tt> in your
+plugin&#8216;s project directory with the path in it.
 </p>
 <h2>LINKS</h2>
 <p>
