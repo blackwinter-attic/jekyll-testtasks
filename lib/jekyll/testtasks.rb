@@ -62,24 +62,10 @@ index 7570cb0..9fbe738 100644
       }
     end
 
-  end
-
-end
-
-# Install test tasks.
-namespace :jekyll do
-
-  task :setup_env do
-    Jekyll::TestTasks.setup_env
-  end
-
-  Jekyll::TestTasks::TASKS.each { |t|
-    desc "Run Jekyll's original #{t} task with this plugin loaded"
-    task t => :setup_env do
-      Jekyll::TestTasks.run_jekyll_task(t)
+    def install_tasks
+      require 'jekyll/testtasks/rake'
     end
-  }
-end
 
-desc "Run Jekyll's test tasks (#{Jekyll::TestTasks::TASKS.join(', ')})"
-task :jekyll => Jekyll::TestTasks::TASKS.map { |t| "jekyll:#{t}" }
+  end
+
+end

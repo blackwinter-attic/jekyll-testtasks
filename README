@@ -9,7 +9,7 @@ This documentation refers to jekyll-testtasks version 0.0.1
 
 Simplifies testing your Jekyll plugins. Just add this to your Rakefile:
 
-  require 'jekyll/testtasks'
+  require 'jekyll/testtasks/rake'
 
 Currently only allows to run Jekyll's original test tasks with your plugin
 loaded to make sure you didn't break anything. More to come?
