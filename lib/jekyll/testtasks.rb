@@ -4,6 +4,8 @@ module Jekyll
 
     extend self
 
+    TASKS = %w[test features].freeze
+
     caller.find { |f| f =~ %r{(.*)/Rakefile:\d+(?::|\z)} }
 
     # Where we're called from (the plugin location)
@@ -65,12 +67,17 @@ end
 # Install test tasks.
 namespace :jekyll do
 
-  %w[test features].each { |t|
+  task :setup_env do
+    Jekyll::TestTasks.setup_env
+  end
+
+  Jekyll::TestTasks::TASKS.each { |t|
     desc "Run Jekyll's original #{t} task with this plugin loaded"
-    task t do
-      Jekyll::TestTasks.setup_env
-      Jekyll::TestTasks.run_jekyll_task t
+    task t => :setup_env do
+      Jekyll::TestTasks.run_jekyll_task(t)
     end
   }
-
 end
+
+desc "Run Jekyll's test tasks (#{Jekyll::TestTasks::TASKS.join(', ')})"
+task :jekyll => Jekyll::TestTasks::TASKS.map { |t| "jekyll:#{t}" }
