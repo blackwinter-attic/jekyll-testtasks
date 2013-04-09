@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>module Jekyll::TestTasks - jekyll-testtasks Application documentation (v0.0.2)</title>
+
+<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+
+<body id="top" class="module">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../index.html">Home</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/jekyll/testtasks.rb
+    <li>lib/jekyll/testtasks/rake.rb
+    <li>lib/jekyll/testtasks/version.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li ><a href="#method-i-ensure_jekyll_patch">#ensure_jekyll_patch</a>
+    
+    <li ><a href="#method-i-in_jekyll_dir">#in_jekyll_dir</a>
+    
+    <li ><a href="#method-i-install_tasks">#install_tasks</a>
+    
+    <li ><a href="#method-i-jekyll_dir">#jekyll_dir</a>
+    
+    <li ><a href="#method-i-run_jekyll_task">#run_jekyll_task</a>
+    
+    <li ><a href="#method-i-setup_env">#setup_env</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../COPYING.html">COPYING</a>
+  
+    <li class="file"><a href="../ChangeLog.html">ChangeLog</a>
+  
+    <li class="file"><a href="../README.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../Jekyll.html">Jekyll</a>
+  
+    <li><a href="../Jekyll/TestTasks.html">Jekyll::TestTasks</a>
+  
+    <li><a href="../Jekyll/TestTasks/NotFoundError.html">Jekyll::TestTasks::NotFoundError</a>
+  
+    <li><a href="../Jekyll/TestTasks/NotSetError.html">Jekyll::TestTasks::NotSetError</a>
+  
+    <li><a href="../Jekyll/TestTasks/TestTasksError.html">Jekyll::TestTasks::TestTasksError</a>
+  
+    <li><a href="../Jekyll/TestTasks/UnpatchedError.html">Jekyll::TestTasks::UnpatchedError</a>
+  
+    <li><a href="../Jekyll/TestTasks/Version.html">Jekyll::TestTasks::Version</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="module">module Jekyll::TestTasks</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <!-- Constants -->
+    <section id="constants-list" class="section">
+      <h3 class="section-header">Constants</h3>
+      <dl>
+      
+        <dt id="CALLER">CALLER
+        
+        <dd class="description"><p>Where we&#39;re called from (the plugin location)</p>
+        
+      
+        <dt id="JEKYLL_PATCH">JEKYLL_PATCH
+        
+        <dd class="description"><p>Patch to apply to the <a href="../Jekyll.html">Jekyll</a> installation</p>
+        
+      
+        <dt id="TASKS">TASKS
+        
+        <dd class="description"><p>Jekyll&#39;s test tasks to install for the plugin</p>
+        
+      
+        <dt id="VERSION">VERSION
+        
+        <dd class="description">
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-ensure_jekyll_patch" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            ensure_jekyll_patch
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Ensures that the specified <a href="../Jekyll.html">Jekyll</a> installation
+seems to be patched appropriately.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="ensure_jekyll_patch-source">
+            <pre><span class="ruby-comment"># File lib/jekyll/testtasks.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">ensure_jekyll_patch</span>
+  <span class="ruby-identifier">file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-string">&#39;lib/jekyll/site.rb&#39;</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">UnpatchedError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Dir</span>.<span class="ruby-identifier">pwd</span>) <span class="ruby-keyword">unless</span> <span class="ruby-node">%w[PLUGIN_PATH PLUGIN]</span>.<span class="ruby-identifier">all?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">file</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/&#39;#{k}&#39;/</span>  }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- ensure_jekyll_patch-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- ensure_jekyll_patch-method -->
+
+    
+      <div id="method-i-in_jekyll_dir" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            in_jekyll_dir { ... }
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Runs the block inside the <a href="../Jekyll.html">Jekyll</a> installation
+directory.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="in_jekyll_dir-source">
+            <pre><span class="ruby-comment"># File lib/jekyll/testtasks.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">in_jekyll_dir</span>
+  <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-identifier">jekyll_dir</span>) { <span class="ruby-identifier">ensure_jekyll_patch</span>; <span class="ruby-keyword">yield</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- in_jekyll_dir-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- in_jekyll_dir-method -->
+
+    
+      <div id="method-i-install_tasks" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            install_tasks
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Installs the relevant tasks.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="install_tasks-source">
+            <pre><span class="ruby-comment"># File lib/jekyll/testtasks.rb, line 95</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">install_tasks</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;jekyll/testtasks/rake&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- install_tasks-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- install_tasks-method -->
+
+    
+      <div id="method-i-jekyll_dir" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            jekyll_dir &rarr; aString
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Returns the <a href="../Jekyll.html">Jekyll</a> installation directory as
+specified through the <code>JEKYLL</code> environment variable or the
+<code>.jekyll</code> file in your plugin&#39;s project directory.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="jekyll_dir-source">
+            <pre><span class="ruby-comment"># File lib/jekyll/testtasks.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">jekyll_dir</span>
+  <span class="ruby-identifier">jekyll</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;JEKYLL&#39;</span>] <span class="ruby-operator">||</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">dot_jekyll</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">CALLER</span>, <span class="ruby-string">&#39;.jekyll&#39;</span>)
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">dot_jekyll</span>).<span class="ruby-identifier">strip</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">readable?</span>(<span class="ruby-identifier">dot_jekyll</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotSetError</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">jekyll</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotFoundError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">jekyll</span>) <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">jekyll</span>)
+
+  <span class="ruby-identifier">jekyll</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- jekyll_dir-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- jekyll_dir-method -->
+
+    
+      <div id="method-i-run_jekyll_task" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            run_jekyll_task(task)
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Runs Jekyll&#39;s original Rake task <code>task</code>.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="run_jekyll_task-source">
+            <pre><span class="ruby-comment"># File lib/jekyll/testtasks.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">run_jekyll_task</span>(<span class="ruby-identifier">task</span>)
+  <span class="ruby-identifier">in_jekyll_dir</span> { <span class="ruby-identifier">system</span>(<span class="ruby-string">&#39;rake&#39;</span>, <span class="ruby-identifier">task</span>) }
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">TestTasksError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
+  <span class="ruby-identifier">warn</span> <span class="ruby-identifier">err</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">err</span>.<span class="ruby-identifier">payload</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">err</span>.<span class="ruby-identifier">payload</span>
+
+  <span class="ruby-identifier">exit</span> <span class="ruby-value">1</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- run_jekyll_task-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- run_jekyll_task-method -->
+
+    
+      <div id="method-i-setup_env" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            setup_env
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Sets environment variables for the patched <a
+href="../Jekyll.html">Jekyll</a> to pick up.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="setup_env-source">
+            <pre><span class="ruby-comment"># File lib/jekyll/testtasks.rb, line 37</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">setup_env</span>
+  <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;PLUGIN_PATH&#39;</span>] = <span class="ruby-constant">Dir</span>[<span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-string">&#39;../jekyll-*/lib&#39;</span>, <span class="ruby-constant">CALLER</span>)].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;:&#39;</span>)
+  <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;PLUGIN&#39;</span>] = <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-constant">CALLER</span>).<span class="ruby-identifier">sub</span>(<span class="ruby-string">&#39;-&#39;</span>, <span class="ruby-string">&#39;/&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- setup_env-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- setup_env-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.1.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+
