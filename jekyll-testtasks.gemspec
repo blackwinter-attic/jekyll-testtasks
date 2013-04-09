@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors = ["Jens Wille"]
   s.date = %q{2010-07-02}
   s.description = %q{Test your Jekyll plugins with ease.}
-  s.email = %q{jens.wille@uni-koeln.de}
+  s.email = %q{jens.wille@gmail.com}
   s.extra_rdoc_files = ["COPYING", "ChangeLog", "README"]
   s.files = ["lib/jekyll/testtasks/version.rb", "lib/jekyll/testtasks/rake.rb", "lib/jekyll/testtasks.rb", "README", "ChangeLog", "Rakefile", "COPYING"]
   s.rdoc_options = ["--title", "jekyll-testtasks Application documentation", "--main", "README", "--line-numbers", "--inline-source", "--charset", "UTF-8", "--all"]

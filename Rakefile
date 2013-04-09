@@ -9,7 +9,7 @@ begin
       :version => Jekyll::TestTasks::VERSION,
       :summary => %q{Test your Jekyll plugins with ease.},
       :author  => %q{Jens Wille},
-      :email   => %q{jens.wille@uni-koeln.de}
+      :email   => %q{jens.wille@gmail.com}
     }
   }}
 rescue LoadError => err
