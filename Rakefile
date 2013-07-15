@@ -10,6 +10,7 @@ begin
       :summary      => %q{Test your Jekyll plugins with ease.},
       :author       => %q{Jens Wille},
       :email        => %q{jens.wille@gmail.com},
+      :license      => %q{AGPL},
       :homepage     => :blackwinter,
       :dependencies => %w[]
     }
